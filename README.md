@@ -61,15 +61,15 @@ Also, look for `std::string message` to specify a prefix to your message. You ca
 
 Use `mpirun phpmagic_sha1_openmpi` or the other method. You may use any way that you use to run Open MPI applications.  
 
-# CPU vs GPU hashrate
+# CPU vs GPU hashrate for SHA-1
 
 This Open MPI application uses CPU only for hashing, not GPU. It is suitable for clusters and distributed computers with plenty of spare CPU time but no GPU.  
 However, please consider using Open MPI + GPU for hashing since GPU provides superior performance when it comes to hashing. You may improve this application by adding GPU support. So you will be able to use this improved application in clusters equipped with professional GPU cards for large-scale calculations.  
-Take the following example. My notebook comes with NVIDIA GeForce MX350 GPU, Intel Iris Plus GPU, and Intel Core i7 1065G7 (Ice Lake). According to my benchmarks, it has the following hash rate for SHA-256:  
+Take the following example. My notebook comes with NVIDIA GeForce MX350 GPU, Intel Iris Plus GPU, and Intel Core i7 1065G7 (Ice Lake). According to my benchmarks, it has the following hash rate for SHA-1:  
 
 - 2 MH/s on CPU without using SHA instructions, in single-threaded mode;
 - 8 MH/s on CPU using SHA instructions, in single-threaded mode;
 - 155.2 MH/s on the Intel Iris Plus GPU @ Accel:16 Loops:1024 Thr:1024 Vec:1;
 - 1558 MH/s on the NVIDIA GeForce MX350 GPU @ Accel:512 Loops:128 Thr:8 Vec:4.
 
-The CPU has 4 cores, 8 threads. Even if we assume that the turbo frequency would not drop if we run 8 threads, 8 MH/s * 8 threads = 64 MH/s. In this best-case CPU-only scenario, this is still 25 times slower than on the GPU, with which this notebook is equipped. Even this modest GPU with which the manufacturer supplied this notebook provides 1558 MH/s on SHA-256. Imagine which hash rate may have a special-purpose professional GPU aimed for scientific fields and high-performance computing. Therefore, I'd be glad if you improve the Open MPI application to support GPU.  
+The CPU has 4 cores, 8 threads. Even if we assume that the turbo frequency would not drop if we run 8 threads, we get a total hash rate per CPU: 8 MH/s * 8 threads = 64 MH/s for SHA-1, consuming 25 and priced US $426 in August 2019, but in reality, turbo frequency drops quickly on the notebook. In this best-case CPU-only scenario, the hash rate on this CPU is 25 times slower than on the GPU of this notebook is equipped. Even this modest GPU with which the manufacturer supplied this notebook provides 1558 MH/s for SHA-1. Imagine which hash rate may have a special-purpose professional GPU aimed for scientific fields and high-performance computing. On real servers, AMD EPYC 7401P can sustain for a long time the hash rate of 9 MH/s per hyperthreading's thread, thanks to the efficient implementation of SHA instructions, i.e., 24 cores * 2 thread * 9 MH/s = 432 MH/s per CPU with 170W power consumption and list price US $1075 (on June 2017). The AMD Ryzen 7 1700X CPU can sustain for a long time the hash rate of 12 MH/s per hyperthreading thread, i.e., 8 cores * 2 threads * 12 MH /s = 192 MH/s, consuming 95W, and priced US $399 in March 2017. Therefore, I'd be glad if you improve the Open MPI application to support GPU.  
