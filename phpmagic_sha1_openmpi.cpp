@@ -512,14 +512,21 @@ int main(int argc, char* argv[])
             }
         }
         int len = 0;
-        while (*charptr != CInitialChar)
+        int i = 0;
+        while (i < CSuffixLength)
         {
-            ++len;
-            --charptr;
+            if (suffix[i] != CInitialChar) break;
+            i++;
         }
-        ++charptr;
-        if (len>0)
+        len = CSuffixLength - i;
+        if (len > 0)
+        {
+            for (i = 0; i < len-1; ++i)
+            {
+                --charptr;
+            }
             message.append(charptr, len);
+        }
     }
 #endif
 
