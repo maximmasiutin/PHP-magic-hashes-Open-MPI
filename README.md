@@ -66,8 +66,10 @@ Use `mpirun phpmagic_sha1_openmpi` or the other method. You may use any way that
 This Open MPI application uses CPU only for hashing, not GPU. It is suitable for clusters and distributed computers with plenty of spare CPU time but no GPU.  
 However, please consider using Open MPI + GPU for hashing since GPU provides superior performance when it comes to hashing. You may improve this application by adding GPU support. So you will be able to use this improved application in clusters equipped with professional GPU cards for large-scale calculations.  
 Take the following example. My notebook comes with NVIDIA GeForce MX350 GPU, Intel Iris Plus GPU, and Intel Core i7 1065G7 (Ice Lake). According to my benchmarks, it has the following hash rate for SHA-256:  
+
 - 2 MH/s on CPU without using SHA instructions, in single-threaded mode;
 - 8 MH/s on CPU using SHA instructions, in single-threaded mode;
 - 155.2 MH/s on the Intel Iris Plus GPU @ Accel:16 Loops:1024 Thr:1024 Vec:1;
 - 1558 MH/s on the NVIDIA GeForce MX350 GPU @ Accel:512 Loops:128 Thr:8 Vec:4.
+
 The CPU has 4 cores, 8 threads. Even if we assume that the turbo frequency would not drop if we run 8 threads, 8 MH/s * 8 threads = 64 MH/s. In this best-case CPU-only scenario, this is still 25 times slower than on the GPU, with which this notebook is equipped. Even this modest GPU with which the manufacturer supplied this notebook provides 1558 MH/s on SHA-256. Imagine which hash rate may have a special-purpose professional GPU aimed for scientific fields and high-performance computing. Therefore, I'd be glad if you improve the Open MPI application to support GPU.  
