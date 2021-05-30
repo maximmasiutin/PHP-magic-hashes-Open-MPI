@@ -1,6 +1,6 @@
 /*
 PHP-magic-hashes-Open-MPI
-Copyright 2021 Maxim Masiutin <maxim@masitin.com>
+Copyright 2021 Maxim Masiutin <maxim@masiutin.com>
 All rights reserved
 
 Version 1.0.
